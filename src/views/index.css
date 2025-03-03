@@ -1,0 +1,8 @@
+tr *{
+    align-content: center;
+}
+
+tr td img{
+width: 8rem;
+height: 12rem;
+}
