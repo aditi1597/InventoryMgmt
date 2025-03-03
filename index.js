@@ -4,6 +4,7 @@ import ejsLayouts from 'express-ejs-layouts';
 import validateRequest from "./src/middlewares/validatingForm.js"
 import {uploadFile} from './src/middlewares/file-upload.js';
 import path from "path";
+import UserController from "./src/controllers/user.controller.js";
 
 // const express = require("express");
 //create server
@@ -25,6 +26,9 @@ server.use(ejsLayouts);
 
 //create productController instance
 const productController = new ProductController();
+const userController = new UserController();
+server.get("/register", userController.getRegister);
+
 server.get("/", productController.getProducts);
 server.get("/new", productController.getAddForm);
 server.get('/update-product/:id', productController.getUpdateProductView);

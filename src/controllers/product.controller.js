@@ -1,10 +1,9 @@
 import path from "path";
-import productModel from '../models/product.model.js';
 import ProductModel from "../models/product.model.js";
 
 export default class ProductController{
     getProducts(req, res){
-        let product = productModel.get();
+        let product = ProductModel.get();
         console.log(product);
         
         res.render("products", {products: product})
@@ -18,8 +17,8 @@ export default class ProductController{
         //access data from form
         const imageUrl = "images/" + req.file.filename;
         const {name, desc, price} = req.body;
-        productModel.add(name, desc, price, imageUrl);
-        let product = productModel.get();
+        ProductModel.add(name, desc, price, imageUrl);
+        let product = ProductModel.get();
         return res.render("products", {products: product})
     }
 
