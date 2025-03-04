@@ -28,7 +28,7 @@ server.use(ejsLayouts);
 const productController = new ProductController();
 const userController = new UserController();
 server.get("/register", userController.getRegister);
-
+server.get("/login", userController.getLogin);
 server.get("/", productController.getProducts);
 server.get("/new", productController.getAddForm);
 server.get('/update-product/:id', productController.getUpdateProductView);
@@ -36,6 +36,8 @@ server.post('/delete-product/:id', productController.deleteProduct);
 
 server.post("/",  uploadFile.single("url") ,validateRequest, productController.addNewProduct);
 server.post('/update-product', uploadFile.single("url") , productController.updateProduct, productController.getProducts);
+server.post("/register", userController.registerUser);
+server.post("/login", userController.loginUser);
 
 
 server.use(express.static("src/views"));

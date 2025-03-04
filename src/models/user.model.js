@@ -18,6 +18,12 @@ export default class UserModel{
     static add(name, email, password){
         let user = new UserModel(name, email, password);
         users.push(user);
+        console.log(users);
+    }
+
+    static login(email, password){
+        let user = users.find((user)=> user.email == email && user.password == password);
+        return user;
     }
 
 }
