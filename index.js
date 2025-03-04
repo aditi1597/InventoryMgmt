@@ -8,6 +8,8 @@ import UserController from "./src/controllers/user.controller.js";
 import userValidation from "./src/middlewares/userValidation.js";
 import session from 'express-session';
 import { auth } from "./src/middlewares/auth.middleware.js";
+import cookieParser from "cookie-parser";
+import { setLastVisit } from "./src/middlewares/lastVisit.middleware.js"
 
 // const express = require("express");
 //create server
@@ -32,6 +34,10 @@ server.set("views", path.join(path.resolve(),"src", "views"));
 
 //ejh layout
 server.use(ejsLayouts);
+
+//cookie parser
+server.use(cookieParser());
+server.use(setLastVisit);
 
 //create productController instance
 const productController = new ProductController();
