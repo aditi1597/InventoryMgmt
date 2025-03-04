@@ -6,11 +6,11 @@ export default class ProductController{
         let product = ProductModel.get();
         console.log(product);
         
-        res.render("products", {products: product})
+        res.render("products", {products: product, userEmail: req.session.userEmail})
     }
 
     getAddForm(req, res){
-       return res.render("new-products", {errorMessage : null});
+       return res.render("new-products", {errorMessage : null, userEmail: req.session.userEmail});
     }
 
     addNewProduct(req,res){
@@ -19,14 +19,14 @@ export default class ProductController{
         const {name, desc, price} = req.body;
         ProductModel.add(name, desc, price, imageUrl);
         let product = ProductModel.get();
-        return res.render("products", {products: product})
+        return res.render("products", {products: product, userEmail: req.session.userEmail})
     }
 
     getUpdateProductView(req, res, next){
         const id = req.params.id;
         let productFound = ProductModel.getById(id);
         if(productFound){
-            return res.render("update-product", {product: productFound, errorMessage : null});
+            return res.render("update-product", {product: productFound, errorMessage : null, userEmail: req.session.userEmail});
         }
         else{
             res.status(401).send("Product not Found!!");
@@ -52,6 +52,6 @@ export default class ProductController{
         ProductModel.delete(id);
         console.log("deleted from controller");
         let products = ProductModel.get();
-        return res.render("products", {products: products});
+        return res.render("products", {products: products, userEmail: req.session.userEmail});
     }
 }

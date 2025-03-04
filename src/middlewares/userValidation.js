@@ -1,5 +1,4 @@
 import {body, validationResult} from "express-validator"
-import {} from "password-validator"
 
 export default async function userValidation(req, res, next) {
     

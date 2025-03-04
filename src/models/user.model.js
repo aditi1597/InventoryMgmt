@@ -1,3 +1,5 @@
+import { name } from "ejs";
+
 export default class UserModel{
 
     constructor(name, email, password){
@@ -29,5 +31,5 @@ export default class UserModel{
 }
 
 var users =[ 
-
+    {id:1, name: "test", email: "test@gmail.com", password: "Test@123"}
 ];

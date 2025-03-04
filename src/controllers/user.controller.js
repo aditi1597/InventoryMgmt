@@ -11,16 +11,6 @@ export default class UserController{
         res.render("login", {errorMessage: null});
     }
 
-    getUserbyEmail(req, res){
-        const {email} = req.body;
-        let user = UserModel.getbyEmail(email);
-        if(!user){
-
-        }
-        else{
-             
-        }
-    }
 
     registerUser(req, res, next){
         const {name, email, password} = req.body;
@@ -33,12 +23,26 @@ export default class UserController{
         let correctCredential = UserModel.login(email, password);
 
         if(correctCredential){
+            
+            req.session.userEmail = email;
+            console.log(req.session);
             let product = ProductModel.get();
-            res.render("products", {products: product})
+            res.render("products", {products: product, userEmail: req.session.userEmail})
         }
         else{
             res.render("login" , {errorMessage: "Invalid Credentials"})
         }
+    }
+
+    logoutUser(req, res){
+        req.session.destroy((err)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect("login");
+            }
+        } )
 
     }
 }
