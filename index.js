@@ -5,6 +5,7 @@ import validateRequest from "./src/middlewares/validatingForm.js"
 import {uploadFile} from './src/middlewares/file-upload.js';
 import path from "path";
 import UserController from "./src/controllers/user.controller.js";
+import userValidation from "./src/middlewares/userValidation.js";
 
 // const express = require("express");
 //create server
@@ -36,7 +37,7 @@ server.post('/delete-product/:id', productController.deleteProduct);
 
 server.post("/",  uploadFile.single("url") ,validateRequest, productController.addNewProduct);
 server.post('/update-product', uploadFile.single("url") , productController.updateProduct, productController.getProducts);
-server.post("/register", userController.registerUser);
+server.post("/register", userValidation, userController.registerUser);
 server.post("/login", userController.loginUser);
 
 

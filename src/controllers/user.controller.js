@@ -4,7 +4,7 @@ import ProductModel from "../models/product.model.js";
 export default class UserController{
 
     getRegister(req, res){
-        res.render("register");
+        res.render("register", {errorMessage: null});
     }
 
     getLogin(req, res){
